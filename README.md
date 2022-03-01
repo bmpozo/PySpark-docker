@@ -163,10 +163,10 @@ docker exec -it spark-master /spark/bin/spark-submit --master spark://spark-mast
 ```
 5. Check output
 ```sh
-cat data/output/data_top50_sessions.csv/part-* 
+cat data/output/data_top50_sessions/part-* 
 ```
 ```sh
-cat data/output/data_top10_songs.csv/part-*
+cat data/output/data_top10_songs/part-*
 ```
 
 # <a name="Improvement"></a>Improvement

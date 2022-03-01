@@ -39,7 +39,8 @@ if __name__ == "__main__":
     # write result of top 50 sessions
     top50_sessions.coalesce(1) \
         .write.format('com.databricks.spark.csv') \
-        .save('file:///opt/spark-data/output/data_top50_sessions.csv',header = 'true')
+        .mode("overwrite") \
+        .save('file:///opt/spark-data/output/data_top50_sessions',header = 'true')
 
     # function to get the top 10 songs more reproduced in the previous top 50 sessions
     top10_songs = apply_top10(df_allgroups,top50_sessions)
@@ -47,4 +48,5 @@ if __name__ == "__main__":
     # write result of top 10 songs
     top10_songs.coalesce(1) \
         .write.format('com.databricks.spark.csv') \
-        .save('file:///opt/spark-data/output/data_top10_songs.csv',header = 'true')
+        .mode("overwrite") \
+        .save('file:///opt/spark-data/output/data_top10_songs',header = 'true')
