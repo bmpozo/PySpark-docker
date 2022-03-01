@@ -1,7 +1,7 @@
-## Run PySpark application in an Spark Standalone Cluster using Docker
+# Run PySpark application in an Spark Standalone Cluster using Docker
 Personal project to create an application using PySpark to run a quick analysis in a real data set.
 
-## Contents
+# Contents
 
 - [Requirements](#Requirements)
 - [Tech Stack](#Tech-Stack")
@@ -10,14 +10,14 @@ Personal project to create an application using PySpark to run a quick analysis 
 - [Improvement](#Improvement)
 - [Reference](#Reference)
 
-## <a name="Requirements"></a>Requirements
-# What it is required
+# <a name="Requirements"></a>Requirements
+## What it is required
 
 * Docker version 20.10.12
 * docker-compose version 1.25.0
 
-## <a name="Tech-Stack"></a>Tech Stack
-# Project Structure
+# <a name="Tech-Stack"></a>Tech Stack
+## Project Structure
 
 The following project structure will be used
 
@@ -30,7 +30,7 @@ The following project structure will be used
 
 ```
 
-# The compose File
+## The compose File
 
 Now that we have our apache-spark image is time to create a cluster in docker-compose
 
@@ -82,7 +82,7 @@ Local folder|Docker container folder
 scr|/opt/spark-src
 data|/opt/spark-data
 
-# Running Docker containers individually
+## Running Docker containers individually
 ### Spark Master
 To start a Spark master:
 
@@ -93,7 +93,7 @@ To start a Spark worker:
 
     docker run --name spark-worker-1 --link spark-master:spark-master -d bde2020/spark-worker:3.2.0-hadoop3.2
 
-# Running Docker containers cluster
+## Running Docker containers cluster
 In case there is any previous execution and the containers weren't deleted:
 
     docker rm -f $(docker ps -a -q)
@@ -111,8 +111,8 @@ To validate your cluster just access the spark UI on each worker & master URL
 | Spark Worker I  | [localhost:8081](http://localhost:8081/) | Spark Worker node with 1 core and 512m of memory (default) |
 | Spark Worker II | [localhost:8082](http://localhost:8082/) | Spark Worker node with 1 core and 512m of memory (default) |
 
-## <a name="App"></a>App
-# The Demo App
+# <a name="App"></a>App
+## The Demo App
 
 The following app can be found in src directory, this app is used as proof of concept of our cluster behavior.
 
@@ -146,8 +146,8 @@ To submit the app connect to one of the workers or the master and execute:
 
     /spark/bin/spark-submit --master spark://spark-master:7077 /opt/spark-src/lastfm/lastfm.py
 
-## <a name="Execution"></a>Execution
-# Step-by-step
+# <a name="Execution"></a>Execution
+## Step-by-step
 1. Import the project
 2. Run the bash script
 ```sh
@@ -169,12 +169,12 @@ cat data/output/data_top50_sessions.csv/part-*
 cat data/output/data_top10_songs.csv/part-*
 ```
 
-## <a name="Improvement"></a>Improvement
-# What's left to do?
+# <a name="Improvement"></a>Improvement
+## What's left to do?
 
 * Input file to be uploaded into HDFS to run the app in cluster mode to have faster performance
 
 * Write output in Hive or Hbase to not use coalesce(1) and enable a reporting tool (like PBI) to connect to explore the results
 
-## <a name="Reference"></a>Reference
+# <a name="Reference"></a>Reference
 [big-data-europe](https://github.com/big-data-europe/docker-spark)
