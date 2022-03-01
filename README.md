@@ -33,7 +33,7 @@ The following project structure will be used
 Now that we have our apache-spark image is time to create a cluster in docker-compose
 
 ```yaml
-version: '1'
+version: '3'
 services:
   spark-master:
     image: bde2020/spark-master:3.2.0-hadoop3.2
