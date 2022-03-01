@@ -71,13 +71,13 @@ def  apply_top10(df_all: DataFrame, df_top50: DataFrame) -> DataFrame:
     """
     w_4 = Window.orderBy(F.col('number_reps').desc())
 
-    data_top10_song = df_all.join(df_top50, ['userid','group_session_id'])
+    data_top50_with_songs = df_all.join(df_top50, ['userid','group_session_id'])
 
-    data_top10_song \
+    data_top10_songs = data_top50_with_songs \
     .groupBy(F.col('musicbrainz-track-id'),F.col('track-name')) \
     .agg(F.count(F.col('unique_id')).alias('number_reps')) \
     .withColumn('order_top_songs',F.rank().over(w_4)) \
     .filter(F.col('order_top_songs') <= 10) \
     .select(F.col('track-name'),F.col('number_reps'),F.col('order_top_songs'))
 
-    return data_top10_song
+    return data_top10_songs
