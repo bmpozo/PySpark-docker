@@ -19,7 +19,7 @@ if __name__ == "__main__":
     
     # read the text file with previous schema
     df = spark.read.options(header='False',schema=schema,delimiter='\t') \
-        .csv("file:///opt/spark-data/input/userid-timestamp-artid-artname-traid-traname.tsv")
+        .csv("file:///opt/spark-data/input/lastfm-dataset-1K/userid-timestamp-artid-artname-traid-traname.tsv")
 
     # load previous text file into a dataframe with an extra column of time in unix formatt 
     data = df.toDF('userid', \
