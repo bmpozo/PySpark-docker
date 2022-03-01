@@ -6,6 +6,8 @@ Personal project to create an application using PySpark to run a quick analysis 
 - [Requirements](#Requirements)
 - [Tech Stack](#Tech-Stack")
 - [App](#App)
+- [Execution](#Execution)
+- [Improvement](#Improvement)
 - [Reference](#Reference)
 
 ## <a name="Requirements"></a>Requirements
@@ -143,6 +145,36 @@ OR
 To submit the app connect to one of the workers or the master and execute:
 
     /spark/bin/spark-submit --master spark://spark-master:7077 /opt/spark-src/lastfm/lastfm.py
+
+## <a name="Execution"></a>Execution
+# Step-by-step
+1. Import the project
+2. Run the bash script
+```sh
+sh get_lastfm_data.sh
+```
+3. Create docker cluster
+```sh
+docker-compose up -d
+```
+4. Run app in spark
+```sh
+docker exec -it spark-master /spark/bin/spark-submit --master spark://spark-master:7077 /opt/spark-src/lastfm/lastfm.py
+```
+5. Check output
+```sh
+cat data/output/data_top50_sessions.csv/part-* 
+```
+```sh
+cat data/output/data_top10_songs.csv/part-*
+```
+
+## <a name="Improvement"></a>Improvement
+# What's left to do?
+
+* Input file to be uploaded into HDFS to run the app in cluster mode to have faster performance
+
+* Write output in Hive or Hbase to not use coalesce(1) and enable a reporting tool (like PBI) to connect to explore the results
 
 ## <a name="Reference"></a>Reference
 [big-data-europe](https://github.com/big-data-europe/docker-spark)
