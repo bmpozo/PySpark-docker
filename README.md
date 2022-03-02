@@ -15,6 +15,8 @@ Personal project to create an application using PySpark to run a quick analysis 
 
 * Docker version 20.10.12
 * docker-compose version 1.25.0
+* openjdk version "11.0.13"
+* javac 11.0.13
 
 # <a name="Tech-Stack"></a>Tech Stack
 ## Project Structure
