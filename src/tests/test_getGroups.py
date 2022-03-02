@@ -1,11 +1,13 @@
-from contextlib import nullcontext
 from lastfm.utils import apply_getGroups
 from tests.utils.dataframe_test_utils import PySparkTestCase, test_schema, test_data
+
 from pyspark.sql.types import StructType, StringType, LongType, IntegerType
 
-class SimpleTestCase(PySparkTestCase):
 
+class SimpleTestCase(PySparkTestCase):
+    
     def test_getGroups_schema(self):
+
         input_schema = StructType() \
             .add("userid",StringType(),True) \
             .add("timestamp",StringType(),True) \
@@ -27,7 +29,7 @@ class SimpleTestCase(PySparkTestCase):
         input_df = self.spark.createDataFrame(data=input_data, schema=input_schema)
 
         transformed_df = apply_getGroups(input_df)
-
+        
         expected_schema = StructType() \
             .add("userid",StringType(),True) \
             .add("musicbrainz-track-id",StringType(),True) \
@@ -54,6 +56,7 @@ class SimpleTestCase(PySparkTestCase):
         self.assertTrue(test_schema(transformed_df, expected_df))
 
     def test_getGroups_data(self):
+        
         input_schema = StructType() \
             .add("userid",StringType(),True) \
             .add("timestamp",StringType(),True) \

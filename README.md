@@ -172,6 +172,8 @@ cat data/output/data_top10_songs/part-*
 # <a name="Improvement"></a>Improvement
 ## What's left to do?
 
+* Add more tests to have a coverage of at least 90 %
+
 * Input file to be uploaded into HDFS to run the app in cluster mode to have faster performance
 
 * Write output in Hive or Hbase to not use coalesce(1) and enable a reporting tool (like PBI) to connect to explore the results

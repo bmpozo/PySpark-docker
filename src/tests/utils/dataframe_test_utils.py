@@ -4,6 +4,7 @@ from pyspark.sql import DataFrame
 from pyspark.sql import SparkSession
 
 
+
 class PySparkTestCase(unittest.TestCase):
     """Set-up of global test SparkSession"""
 
@@ -21,12 +22,15 @@ class PySparkTestCase(unittest.TestCase):
 
 
 def test_schema(df1: DataFrame, df2: DataFrame, check_nullable=True):
-    """
-    Function for comparing two schemas of DataFrames. If schemas are equal returns True.
-    :param df1: test DataFrame
-    :param df2: test DataFrame
-    :param check_nullable: flag for checking column nullability
-    :return: Boolean
+    """Function for comparing two schemas of DataFrames. If schemas are equal returns True.
+
+    Args:
+        df1 (DataFrame): transformed DataFrame
+        df2 (DataFrame): expected DataFrame
+        check_nullable (bool, optional): Additional check to see if the field is nullable based on a flag. Defaults to True.
+
+    Returns:
+        _type_: True or False
     """
     field_list = lambda fields: (fields.name, fields.dataType, fields.nullable)
     fields1 = [*map(field_list, df1.schema.fields)]
@@ -39,11 +43,14 @@ def test_schema(df1: DataFrame, df2: DataFrame, check_nullable=True):
 
 
 def test_data(df1: DataFrame, df2: DataFrame):
-    """
-    Function for comparing two DataFrame data. If data is equal returns True.
-    :param df1: test DataFrame
-    :param df2: test DataFrame
-    :return: Boolean
+    """Function for comparing two DataFrame data. If data is equal returns True.
+
+    Args:
+        df1 (DataFrame): transformed DataFrame
+        df2 (DataFrame): expected DataFrame
+
+    Returns:
+        _type_: True or False
     """
     data1 = df1.collect()
     data2 = df2.collect()
