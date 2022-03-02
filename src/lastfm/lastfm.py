@@ -11,7 +11,7 @@ if __name__ == "__main__":
     # create schema for the dataframe with the specific data types of each column
     schema = StructType() \
         .add("userid",StringType(),True) \
-        .add("timestamp",TimestampType(),True) \
+        .add("timestamp",StringType(),True) \
         .add("musicbrainz-artist-id",StringType(),True) \
         .add("artist-name",StringType(),True) \
         .add("musicbrainz-track-id",StringType(),True) \
@@ -40,6 +40,7 @@ if __name__ == "__main__":
     top50_sessions.coalesce(1) \
         .write.format('com.databricks.spark.csv') \
         .mode("overwrite") \
+        .option("delimiter", "\t") \
         .save('file:///opt/spark-data/output/data_top50_sessions',header = 'true')
 
     # function to get the top 10 songs more reproduced in the previous top 50 sessions
@@ -49,4 +50,5 @@ if __name__ == "__main__":
     top10_songs.coalesce(1) \
         .write.format('com.databricks.spark.csv') \
         .mode("overwrite") \
+        .option("delimiter", "\t") \
         .save('file:///opt/spark-data/output/data_top10_songs',header = 'true')
